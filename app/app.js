@@ -12,6 +12,7 @@ const home = require("./src/routes/home");
 app.set("views", "./src/views") // views 폴더로 그냥 지정해줌
 app.set("view engine", "ejs") // ejs == html과 같다고 생각
 
+app.use(express.static(`${__dirname}/src/public`));
 app.use("/", home); // use -> 미들 웨어를 등록해주는 메서드. index에서 module과 연결
                     // index.js에 있는 home/index 실행됨
 
