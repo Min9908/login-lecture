@@ -1,19 +1,25 @@
 "use strict";
 
 const id = document.querySelector("#id"); // #을 넣으면 <input id="id" type="text" placegoler="아이디">를 다 가져옴
+const name = document.querySelector("#name");
+const confirmPsword = document.querySelector("#confirm-psword");
 const psword = document.querySelector("#psword");
-const loginBtn = document.querySelector("#button");
+const registerBtn = document.querySelector("#button");
 
-loginBtn.addEventListener("click", login);
+registerBtn.addEventListener("click", register);
 
-function login() {
+function register() {
+    if(!id.value) return alert("아이디를 입력해주세요.")
+    if(psword.value !== confirmPsword.value) return alert("비밀번호가 일치하지 않습니다.")
+    
     const req = {
         id: id.value,
+        name: name.value,
         psword: psword.value,
     }; // 아이디창, 비밀번호창에 입력한 값이 저장됨
 
 
-    fetch("/login", {
+    fetch("/register", {
         method: "POST",
         headers:{
             "Content-Type" : "application/json" // json을 이용한다는 것을 명시
@@ -23,12 +29,12 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
         if(res.success){
-            location.href = "/";
+            location.href = "/login";
          } else{
                 alert(res.msg);
             }
         })
         .catch((err) => {
-            console.error("login err") // "전에 new error 하면 오류코드도.
+            console.error("register err") // "전에 new error 하면 오류코드도.
         })
     }
