@@ -9,19 +9,30 @@ class User{
 
     async login(){ // async는 비동기함수
         const client = this.body
-        const {id, psword } = await UserStorage.getUserInfo(client.id); // 반환할때까지 실행하지 말고 기다려
-        
-        if(id) {
-            if(id === client.id && psword === client.psword){
-                return { success : true }
+            try{
+            const user = await UserStorage.getUserInfo(client.id);
+            
+            if(user) {
+                if(user.id === client.id && user.psword === client.psword){
+                    return { success : true }
+                }
+                return { success : false, msg : "비밀번호 틀림"};
             }
-            return { success : false, msg : "비밀번호 틀림"};
+            return { success : false, msg : "존재하지 않는 아이디"};
+        } catch(err){
+            return { success: false, msg: err};
         }
-        return { success : false, msg : "존재하지 않는 아이디"};
     }
-    register(){
+    async register(){
         const client = this.body
-        UserStorage.save(client)
+        try{
+        const response = await UserStorage.save(client)
+        return response;
+        } catch(err){
+            const a = { success: false, msg: err};
+            console.log(typeof a.msg);
+            return a;
+        }
     }
 }
 

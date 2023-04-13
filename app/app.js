@@ -2,8 +2,11 @@
 
 // 모듈
 const express = require("express")
-const app = express()
 const bodyParser = require("body-parser")
+const dotenv = require("dotenv");
+dotenv.config(); // OS 버전이 다른 경우에도 동일하게 환경변수 등록, 가져올 수 있음
+
+const app = express()
 
 // 라우팅
 const home = require("./src/routes/home");
