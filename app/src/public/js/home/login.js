@@ -21,5 +21,14 @@ function login() {
         body: JSON.stringify(req), // 문자열로 바꿔줌
     })
     .then((res) => res.json())
-    .then((res)=> console.log(res)) 
-}
+    .then((res) => {
+        if(res.success){
+            location.href = "/";
+         } else{
+                alert(res.msg);
+            }
+        })
+        .catch((err) => {
+            console.error("login err") // "전에 new error 하면 오류코드도.
+        })
+    }
