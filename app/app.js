@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use("/", home); // index.js에 있는 home/index 실행됨
 
-module.exports = app; // www.js에 app을 던져줌
+module.exports = app; // www.js에 app.js를 던져줌
 
 
 

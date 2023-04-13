@@ -20,4 +20,6 @@ function login() {
         },
         body: JSON.stringify(req), // 문자열로 바꿔줌
     })
+    .then((res) => res.json())
+    .then((res)=> console.log(res)) 
 }
