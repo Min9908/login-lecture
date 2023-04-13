@@ -7,9 +7,9 @@ class User{
         this.body = body;
     }
 
-    login(){
+    async login(){ // async는 비동기함수
         const client = this.body
-        const { id, psword } = UserStorage.getUserInfo(client.id);
+        const {id, psword } = await UserStorage.getUserInfo(client.id); // 반환할때까지 실행하지 말고 기다려
         
         if(id) {
             if(id === client.id && psword === client.psword){
